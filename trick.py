@@ -1,6 +1,4 @@
-""" Next step is to make OOP 
-
-I am going to need a trick object to contain the state and methods of the trick.
+""" Next step is to continue OOP 
 
 I may need a deck object later.
 
@@ -9,7 +7,8 @@ I may also want card objects later (simple ints are fine for now).
 """
 
 class Trick():
-  def __init__(self):
+  def __init__(self, card=None):
+    self.card = card
     self.deck = list(range(1, 22))
     self.left = []
     self.center = []
@@ -47,7 +46,19 @@ class Trick():
       r0=self.right[0], r1=self.right[1], r2=self.right[2], r3=self.right[3], r4=self.right[4], r5=self.right[5], r6=self.right[6],))
   
   def get_row(self):
-    self.row = input("What row is your card in (l, c, r)")
+    if self.card:
+      if self.card in self.left:
+        self.row = "l"
+        return True
+      elif self.card in self.right:
+        self.row = "r"
+        return True
+      elif self.card in self.center:
+        self.row = "c"
+        return True
+    else:
+      self.row = input("What row is your card in (l, c, r)")
+      return True
     
   def pickup_cards(self):
     if self.row == "l":
@@ -66,36 +77,47 @@ class Trick():
       print("Error")
     
     self.deck = top + mid + bot
+    
+  def round(self):
+    if self.card:
+      self.deal_cards()
+      # self.display_cards()
+      self.get_row()
+      self.pickup_cards()
+    else:
+      self.deal_cards()
+      self.display_cards()
+      self.get_row()
+      self.pickup_cards()
 
 
-def main():
+def check_trick():
+  for x in range(1, 22):
+    trick = Trick(x)
+    trick.round()  # Round 1
+    trick.round()  # Round 2
+    trick.round()  # Round 3
+  
+    # Check
+    # print("Final Check")
+    # trick.deal_cards()
+    if trick.card == trick.deck[10]:
+      print("Yay!")
+    else:
+      print("Boo!")
+
+def do_trick():
   trick = Trick()
-  
+  trick.round()  # Round 1
+  trick.round()  # Round 2
+  trick.round()  # Round 3
 
-  # Round 1
-  trick.deal_cards()
-  trick.display_cards()
-  trick.get_row()
-  trick.pickup_cards()
-
-  
-  # Round 2
-  trick.deal_cards()
-  trick.display_cards()
-  trick.get_row()
-  trick.pickup_cards()
- 
-  
-  # Round 3
-  trick.deal_cards()
-  trick.display_cards()
-  trick.get_row()
-  trick.pickup_cards()
-  
-  # Check
   print("Final Check")
   trick.deal_cards()
   trick.display_cards()
-
+  
+def main():
+  do_trick()
+  # check_trick()
 
 main()
