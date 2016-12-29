@@ -1,34 +1,31 @@
 def main(card):
   cards = list(range(1, 22))
 
-  # Setup
+  # Round 1
   left, cent, right = deal_cards(cards)
   # display_cards(left, cent, right)
-  # card = input("what is your card?")
-  
-  # Round 1
   # row = input("What row is your card in (l, c, r)")
   row = find_row(card, left, cent, right)
-  # input("I believe your card is in the {} row.".format(row))
   cards = pickup_cards(left, cent, right, row)
-  left, cent, right = deal_cards(cards)
-  # display_cards(left, cent, right)
+  
   
   # Round 2
-  # row = input("What row is your card in (l, c, r)")
-  row = find_row(card, left, cent, right)
-  # input("I believe your card is in the {} row.".format(row))
-  cards = pickup_cards(left, cent, right, row)
   left, cent, right = deal_cards(cards)
   # display_cards(left, cent, right)
-  
-  # Round 3
   # row = input("What row is your card in (l, c, r)")
   row = find_row(card, left, cent, right)
   # input("I believe your card is in the {} row.".format(row))
   cards = pickup_cards(left, cent, right, row)
-  # left, cent, right = deal_cards(cards)
+ 
+  
+  # Round 3
+  left, cent, right = deal_cards(cards)
   # display_cards(left, cent, right)
+  # row = input("What row is your card in (l, c, r)")
+  row = find_row(card, left, cent, right)
+  # input("I believe your card is in the {} row.".format(row))
+  cards = pickup_cards(left, cent, right, row)
+
   
   # input("your card is {} the found card is {}".format(card, cards[10]))
   return card, cards[10]
