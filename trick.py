@@ -17,7 +17,7 @@ class Trick():
     self.right = []
     self.row = ""
   
-  def deal_cards(self):
+  def deal_rows(self):
     self.left = []
     self.center = []
     self.right = []
@@ -32,7 +32,7 @@ class Trick():
       else:
         print("error")
         
-  def display_cards(self):
+  def display_rows(self):
     print("""
     Left     Cent     Right
     ----     ----    ----
@@ -67,7 +67,7 @@ class Trick():
       self.row = input("What row is your card in (l, c, r)")
       return True
     
-  def pickup_cards(self):
+  def pickup_rows(self):
     if self.row == "l":
       mid = self.left
       top, bot = sample([self.center, self.right], 2)
@@ -87,15 +87,15 @@ class Trick():
     
   def round(self):
     if self.card:
-      self.deal_cards()
-      # self.display_cards()
+      self.deal_rows()
+      # self.display_rows()
       self.get_row()
-      self.pickup_cards()
+      self.pickup_rows()
     else:
-      self.deal_cards()
-      self.display_cards()
+      self.deal_rows()
+      self.display_rows()
       self.get_row()
-      self.pickup_cards()
+      self.pickup_rows()
 
 
 def check_trick():
@@ -120,8 +120,8 @@ def do_trick():
   trick.round()  # Round 3
 
   print("Final Check")
-  trick.deal_cards()
-  trick.display_cards()
+  trick.deal_rows()
+  trick.display_rows()
   
 def main():
   do_trick()
