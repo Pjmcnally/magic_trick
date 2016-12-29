@@ -16,6 +16,7 @@ class Trick():
     self.center = []
     self.right = []
     self.row = ""
+    self.piles = [1, 2, 3, 4, 5]
   
   def deal_rows(self):
     self.left = []
@@ -96,7 +97,13 @@ class Trick():
       self.display_rows()
       self.get_row()
       self.pickup_rows()
-
+      
+  def part_2(self):
+    while len(self.piles > 1):
+      self.display_piles()
+      pile = self.get_pile()
+      self.pile_magic()
+    
 
 def check_trick():
   for x in range(1, 22):
@@ -119,6 +126,7 @@ def do_trick():
   trick.round()  # Round 2
   trick.round()  # Round 3
 
+  # trick.part_2()
   print("Final Check")
   trick.deal_rows()
   trick.display_rows()
