@@ -6,6 +6,8 @@ I may also want card objects later (simple ints are fine for now).
 
 """
 
+from random import shuffle, sample # in 3.6 sample becomes choices
+
 class Trick():
   def __init__(self, card=None):
     self.card = card
@@ -63,18 +65,18 @@ class Trick():
   def pickup_cards(self):
     if self.row == "l":
       mid = self.left
-      top = self.center
-      bot = self.right
+      top, bot = sample([self.center, self.right], 2)
     elif self.row == "c":
       mid = self.center
-      top = self.left
-      bot = self.right
+      top, bot = sample([self.left, self.right], 2)
     elif self.row == "r":
       mid = self.right
-      top = self.left
-      bot = self.center
+      top, bot = sample([self.left, self.center], 2)
     else:
       print("Error")
+      
+    shuffle(top)
+    shuffle(bot)
     
     self.deck = top + mid + bot
     
