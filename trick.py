@@ -110,6 +110,7 @@ class Trick():
     print(self.piles)
       
   def build_piles(self):
+    del self.deck[20] #  Remove last card in deck to get deck down to 20 cards
     shuffle(self.deck)
     pile = 1
     count = 0 
@@ -121,7 +122,6 @@ class Trick():
       if count == 4:
         count = 0
         pile += 1
-    del(self.piles[6])
     
   def display_piles(self):
     for key, value in self.piles.items():
