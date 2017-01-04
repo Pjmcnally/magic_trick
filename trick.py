@@ -16,7 +16,7 @@ class Trick():
     self.center = []
     self.right = []
     self.row = ""
-    self.piles = [1, 2, 3, 4, 5]
+    self.piles = {}
   
   def deal_rows(self):
     self.left = []
@@ -99,10 +99,51 @@ class Trick():
       self.pickup_rows()
       
   def part_2(self):
-    while len(self.piles > 1):
+    self.card = self.deck[10]
+    print("Card = ", self.card)
+    self.build_piles()
+    print("Piles = ", self.piles)
+    while (len(self.piles) > 1):
       self.display_piles()
       pile = self.get_pile()
-      self.pile_magic()
+      self.pile_magic(pile)
+    print(self.piles)
+      
+  def build_piles(self):
+    shuffle(self.deck)
+    pile = 1
+    count = 0 
+    for x in self.deck:
+      temp = self.piles.get(pile, [])
+      temp.append(x)
+      self.piles[pile] = temp
+      count += 1
+      if count == 4:
+        count = 0
+        pile += 1
+    del(self.piles[6])
+    
+  def display_piles(self):
+    for key, value in self.piles.items():
+      print(key)
+      
+  def get_pile(self):
+    while True:
+      pile = int(input("Please select a pile (enter the number)"))
+      if pile in self.piles.keys():
+        return pile
+      else:
+        print("That is not a valid pile")
+        
+  def pile_magic(self, pile):
+    if self.card in self.piles[pile]:
+      print("That pile is full of magic")
+      temp = self.piles[pile]
+      self.piles.clear()
+      self.piles[pile] = temp
+    else:
+      print("That pile is without magic")
+      del self.piles[pile]
     
 
 def check_trick():
@@ -126,10 +167,10 @@ def do_trick():
   trick.round()  # Round 2
   trick.round()  # Round 3
 
-  # trick.part_2()
-  print("Final Check")
-  trick.deal_rows()
-  trick.display_rows()
+  trick.part_2()
+  
+  # print("Final Check")
+  # print("Your Card is {}".format(trick.card))
   
 def main():
   do_trick()
