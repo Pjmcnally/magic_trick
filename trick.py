@@ -137,12 +137,12 @@ class Trick():
         
   def pile_magic(self, pile):
     if self.card in self.piles[pile]:
-      print("That pile is full of magic")
+      print("That pile is full of magic.  You were right to keep it.")
       temp = self.piles[pile]
       self.piles.clear()
       self.piles[pile] = temp
     else:
-      print("That pile is without magic")
+      print("That pile is without magic.  You were right to remove it.")
       del self.piles[pile]
     
 
